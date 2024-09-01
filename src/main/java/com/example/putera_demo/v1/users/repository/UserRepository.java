@@ -1,10 +1,12 @@
 package com.example.putera_demo.v1.users.repository;
 
+import com.example.putera_demo.v1.users.model.entity.Role;
 import com.example.putera_demo.v1.users.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.lang.NonNull;
 
+import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 import java.util.List;
 
@@ -12,6 +14,12 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, String> {
     @NonNull
     List<User> findAll();
+
     @NonNull
     Optional<User> findById(@NonNull String id);
-}
+
+    @NonNull
+    long countByRole(Role role);
+
+    @NonNull
+    List<User> findAllByRole(@NonNull Role role, Pageable pageable);}

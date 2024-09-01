@@ -2,6 +2,7 @@ package com.example.putera_demo.v1.users.controller;
 
 import com.example.putera_demo.common.model.Pagination;
 import com.example.putera_demo.v1.users.model.dto.UserDto;
+import com.example.putera_demo.v1.users.model.entity.Role;
 import com.example.putera_demo.v1.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,11 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Pagination<UserDto>> getAllUsers(
+            @RequestParam(defaultValue = "MEMBER") Role role,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit) {
 
-        Pagination<UserDto> paginatedUsers = userService.getAllUsers(page, limit);
+        Pagination<UserDto> paginatedUsers = userService.getAllUsers(role, page, limit);
 
         return ResponseEntity.ok(paginatedUsers);
     }

@@ -4,6 +4,7 @@ import com.example.putera_demo.common.model.Pagination;
 import com.example.putera_demo.exception.ResourceNotFoundException;
 import com.example.putera_demo.v1.users.mapper.UserMapper;
 import com.example.putera_demo.v1.users.model.dto.UserDto;
+import com.example.putera_demo.v1.users.model.entity.Role;
 import com.example.putera_demo.v1.users.model.entity.User;
 import com.example.putera_demo.v1.users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,11 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public Pagination<UserDto> getAllUsers(int page, int limit) {
-        int totalItems = (int) userRepository.count();
+    public Pagination<UserDto> getAllUsers(Role role, int page, int limit) {
+        int totalItems = (int) userRepository.countByRole(role);
         int totalPages = (int) Math.ceil((double) totalItems / limit);
 
-        List<UserDto> users = userRepository.findAll(PageRequest.of(page, limit))
-                .getContent()
+        List<UserDto> users = userRepository.findAllByRole(role, PageRequest.of(page - 1, limit))
                 .stream()
                 .map(userMapper::userToUserDto)
                 .collect(Collectors.toList());

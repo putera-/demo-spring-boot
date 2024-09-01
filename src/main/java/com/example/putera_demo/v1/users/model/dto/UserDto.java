@@ -8,4 +8,8 @@ public class UserDto {
     private String email;
     private String firstname;
     private String lastname;
+    private Boolean active;
+    private Boolean verified;
+    private String avatar;
+    private String role;
 }
