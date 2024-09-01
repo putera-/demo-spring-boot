@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/demo-putera-api/v1/users")
 public class UserController {
@@ -22,11 +20,10 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Pagination<UserDto>> getAllUsers(
-            @RequestParam(defaultValue = "MEMBER") Role role,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit) {
 
-        Pagination<UserDto> paginatedUsers = userService.getAllUsers(role, page, limit);
+        Pagination<UserDto> paginatedUsers = userService.getAllUsers(page, limit);
 
         return ResponseEntity.ok(paginatedUsers);
     }

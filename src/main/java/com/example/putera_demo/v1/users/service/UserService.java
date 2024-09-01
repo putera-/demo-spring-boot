@@ -25,11 +25,11 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public Pagination<UserDto> getAllUsers(Role role, int page, int limit) {
-        int totalItems = (int) userRepository.countByRole(role);
+    public Pagination<UserDto> getAllUsers(int page, int limit) {
+        int totalItems = (int) userRepository.count();
         int totalPages = (int) Math.ceil((double) totalItems / limit);
 
-        List<UserDto> users = userRepository.findAllByRole(role, PageRequest.of(page - 1, limit))
+        List<UserDto> users = userRepository.findAll(PageRequest.of(page - 1, limit))
                 .stream()
                 .map(userMapper::userToUserDto)
                 .collect(Collectors.toList());

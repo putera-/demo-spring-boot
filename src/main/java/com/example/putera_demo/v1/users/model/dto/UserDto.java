@@ -1,5 +1,6 @@
 package com.example.putera_demo.v1.users.model.dto;
 
+import com.example.putera_demo.v1.users.model.entity.Role;
 import lombok.Data;
 
 @Data
@@ -11,5 +12,5 @@ public class UserDto {
     private Boolean active;
     private Boolean verified;
     private String avatar;
-    private String role;
+    private Role role;
 }

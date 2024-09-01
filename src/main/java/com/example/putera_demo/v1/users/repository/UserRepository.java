@@ -13,13 +13,5 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
     @NonNull
-    List<User> findAll();
-
-    @NonNull
     Optional<User> findById(@NonNull String id);
-
-    @NonNull
-    long countByRole(Role role);
-
-    @NonNull
-    List<User> findAllByRole(@NonNull Role role, Pageable pageable);}
+}
