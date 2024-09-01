@@ -2,7 +2,9 @@
 FROM openjdk:22-jdk-slim AS build
 WORKDIR /app
 COPY . .
+RUN chmod +x ./gradlew
 RUN ./gradlew build -x test
+#RUN ./gradlew build
 
 # Use an official OpenJDK runtime as a parent image
 FROM openjdk:22-jdk-slim
