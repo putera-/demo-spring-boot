@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: putera-demo
+    image: putera-demo-java:0.0.5
+    restart: always
+    ports:
+      - 8081:8081
+    networks:
+      - mawaddah_api_network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://mawaddah_postgre:5432/mydb?currentSchema=mawaddah_dev
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_DEFAULT_SCHEMA=mawaddah_dev
+
+networks:
+  mawaddah_api_network:
+    name: mawaddah_api_network
+    driver: bridge
